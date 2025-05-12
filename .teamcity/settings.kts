@@ -11,7 +11,7 @@ project {
 object BasicBuild : BuildType({
     name = "Basic Build"
 
-    vcs = vcs {
+    vcs {
         root(DslContext.settingsRoot)
     }
 
