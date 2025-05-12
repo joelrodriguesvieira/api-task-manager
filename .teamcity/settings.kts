@@ -11,8 +11,7 @@ project {
 object BasicBuild : BuildType({
     name = "Basic Build"
 
-    // 🔧 ESSA É A POSIÇÃO CORRETA
-    vcs {
+    vcs = vcs {
         root(DslContext.settingsRoot)
     }
 
