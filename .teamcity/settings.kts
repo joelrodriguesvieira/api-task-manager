@@ -1,21 +1,18 @@
-// .teamcity/settings.kts na raiz do seu repositorio
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.Project
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
-import jetbrains.buildServer.configs.kotlin.*
+version = "2023.1" // Essa linha é obrigatória no settings.kts (não use versionedSettings aqui)
 
-versionedSettings {
-    id("ApiTaskManager") // Substitua pelo ID do seu projeto no TeamCity (opcional, pode ser inferido)
-    name = "api-task-manager" // Substitua pelo nome do seu projeto (opcional)
-    formatVersion = "2023.1" // Ou a versão mais recente que você está usando
-    buildNumberCounter = 1
-    description = "Settings for YOUR_PROJECT_NAME managed via Kotlin DSL" // Descrição opcional
+project {
+    buildType(BasicBuild)
 }
 
 object BasicBuild : BuildType({
-    id("BasicBuild") // ID único para esta Build Configuration
     name = "Basic Build"
 
     vcs {
-        root(RelativeId("ApiTaskManager_HttpsGithubComJoelrodriguesvieiraApiTaskManagerRefsHeadsMaster")) // Referencia ao VCS Root definido acima (ou o ID do VCS Root existente na UI)
+        root(DslContext.settingsRoot)
     }
 
     steps {
@@ -28,7 +25,6 @@ object BasicBuild : BuildType({
     }
 
     triggers {
-        vcs {
-        }
+        vcs { }
     }
 })
